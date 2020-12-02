@@ -12,13 +12,13 @@ final class Day1Tests: XCTestCase {
             1456
         ]
 
-        let tuple = try XCTUnwrap(input.tupleOf2020)
+        let tuple = try XCTUnwrap(input.tupleOfSum(2020))
         guard case (1721, 299) = tuple else { return XCTFail() }
 //        print("The answer is", tuple.0 * tuple.1)
     }
 
     func testDay1a() throws {
-        let tuple = try XCTUnwrap(input.tupleOf2020)
+        let tuple = try XCTUnwrap(input.tupleOfSum(2020))
         print("The answer is", tuple.0 * tuple.1)
     }
 
@@ -32,13 +32,13 @@ final class Day1Tests: XCTestCase {
             1456
         ]
 
-        let triple = try XCTUnwrap(input.tripleOf2020)
+        let triple = try XCTUnwrap(input.tripleOfSum(2020))
         guard case (979, 366, 675) = triple else { return XCTFail() }
 //        print("The answer is", triple.0 * triple.1 * triple.2)
     }
 
     func testDay1b() throws {
-        let triple = try XCTUnwrap(input.tripleOf2020)
+        let triple = try XCTUnwrap(input.tripleOfSum(2020))
         print("The answer is", triple.0 * triple.1 * triple.2)
     }
 }

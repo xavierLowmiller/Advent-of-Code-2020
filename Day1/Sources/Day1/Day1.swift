@@ -1,8 +1,8 @@
 extension Array where Element == Int {
-    var tupleOf2020: (Int, Int)? {
+    func tupleOfSum(_ sum: Int) -> (Int, Int)? {
         for i in self {
             for j in self {
-                if i + j == 2020 {
+                if i + j == sum {
                     return (i, j)
                 }
             }
@@ -11,11 +11,11 @@ extension Array where Element == Int {
         return nil
     }
 
-    var tripleOf2020: (Int, Int, Int)? {
+    func tripleOfSum(_ sum: Int) -> (Int, Int, Int)? {
         for i in self {
             for j in self {
                 for k in self {
-                    if i + j + k == 2020 {
+                    if i + j + k == sum {
                         return (i, j, k)
                     }
                 }
