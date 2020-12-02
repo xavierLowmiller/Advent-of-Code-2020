@@ -4,25 +4,25 @@
 import PackageDescription
 
 let package = Package(
-    name: "Day2",
+    name: "Parsing",
     products: [
         // Products define the executables and libraries a package produces, and make them visible to other packages.
         .library(
-            name: "Day2",
-            targets: ["Day2"]),
+            name: "Parsing",
+            targets: ["Parsing"]),
     ],
     dependencies: [
         // Dependencies declare other packages that this package depends on.
-        .package(path: "../Parsing"),
+        // .package(url: /* package url */, from: "1.0.0"),
     ],
     targets: [
         // Targets are the basic building blocks of a package. A target can define a module or a test suite.
         // Targets can depend on other targets in this package, and on products in packages this package depends on.
         .target(
-            name: "Day2",
-            dependencies: ["Parsing"]),
+            name: "Parsing",
+            dependencies: []),
         .testTarget(
-            name: "Day2Tests",
-            dependencies: ["Day2"]),
+            name: "ParsingTests",
+            dependencies: ["Parsing"]),
     ]
 )

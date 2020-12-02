@@ -1000,3 +1000,4 @@ let input = """
 10-11 q: nqqqqgqfqpf
 4-15 b: fctbwzqnwbnvqbqlb
 """.split(separator: "\n")
+  .map(String.init)

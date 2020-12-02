@@ -1,32 +1,56 @@
 import Foundation
+import Parsing
 
-extension StringProtocol {
-    var isValidPasswordInPart1: Bool {
-        let elements = split(separator: ":")
-        let validator = elements[0].split(separator: " ")
-        let letter = Character(String(validator[1]))
-        let amountRange = validator[0].split(separator: "-").map { Int($0)! }
+private struct Validation1 {
+  let range: ClosedRange<Int>
+  let character: Character
 
-        let password = elements[1].trimmingCharacters(in: .whitespaces)
+  func validate<S: StringProtocol>(_ string: S) -> Bool {
+    range ~= Array(string).filter { $0 == character }.count
+  }
+}
 
-        let letters = Dictionary(grouping: password) { $0 }.mapValues(\.count)
+private struct Validation2 {
+  let index1: Int
+  let index2: Int
+  let character: Character
 
-        guard let count = letters[letter] else { return false }
+  func validate<S: StringProtocol>(_ string: S) -> Bool {
+    (Array(string)[index1] == character) != (Array(string)[index2] == character)
+  }
+}
 
-        return amountRange[0]...amountRange[1] ~= count
-    }
+extension String {
+  var isValidPasswordInPart1: Bool {
 
-    var isValidPasswordInPart2: Bool {
-        let elements = split(separator: ":")
-        let validator = elements[0].split(separator: " ")
-        let letter = Character(String(validator[1]))
-        let indices = validator[0]
-            .split(separator: "-")
-            .map { Int($0)! }
-            .map { $0 - 1 }
+    let validator = Parser.int
+      .skip("-")
+      .take(.int)
+      .skip(" ")
+      .take(.char)
+      .skip(": ")
+      .map { lowerBound, upperBound, char in
+        Validation1(range: lowerBound...upperBound, character: char)
+      }
+    guard case let (result?, password) = validator.run(self[...])
+      else { return false }
 
-        let password = Array(elements[1].trimmingCharacters(in: .whitespaces))
+    return result.validate(password)
+  }
 
-        return (password[indices[0]] == letter) != (password[indices[1]] == letter)
-    }
+  var isValidPasswordInPart2: Bool {
+    let validator = Parser.int
+      .skip("-")
+      .take(.int)
+      .skip(" ")
+      .take(.char)
+      .skip(": ")
+      .map { index1, index2, char in
+        Validation2(index1: index1 - 1, index2: index2 - 1, character: char)
+      }
+    guard case let (result?, password) = validator.run(self[...])
+      else { return false }
+
+    return result.validate(password)
+  }
 }
