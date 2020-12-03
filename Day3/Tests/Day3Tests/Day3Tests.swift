@@ -2,14 +2,67 @@ import XCTest
 @testable import Day3
 
 final class Day3Tests: XCTestCase {
-    func testExample() {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct
-        // results.
-        XCTAssertEqual(Day3().text, "Hello, World!")
-    }
+  func testDay3Part1Example() {
+    let input = """
+      ..##.......
+      #...#...#..
+      .#....#..#.
+      ..#.#...#.#
+      .#...##..#.
+      ..#.##.....
+      .#.#.#....#
+      .#........#
+      #.##...#...
+      #...##....#
+      .#..#...#.#
+      """
+    let slope = Slope(string: input)
 
-    static var allTests = [
-        ("testExample", testExample),
-    ]
+    XCTAssertEqual(slope.treesWhileSliding(x: 3, y: 1), 7)
+  }
+
+  func testDay3Part1() {
+
+    let slope = Slope(string: input)
+
+    print(slope.treesWhileSliding(x: 3, y: 1))
+  }
+
+  func testDay3Part2Example() {
+    let input = """
+      ..##.......
+      #...#...#..
+      .#....#..#.
+      ..#.#...#.#
+      .#...##..#.
+      ..#.##.....
+      .#.#.#....#
+      .#........#
+      #.##...#...
+      #...##....#
+      .#..#...#.#
+      """
+    let slope = Slope(string: input)
+
+    XCTAssertEqual(
+      slope.treesWhileSliding(x: 1, y: 1) *
+      slope.treesWhileSliding(x: 3, y: 1) *
+      slope.treesWhileSliding(x: 5, y: 1) *
+      slope.treesWhileSliding(x: 7, y: 1) *
+      slope.treesWhileSliding(x: 1, y: 2),
+      336)
+  }
+
+  func testDay3Part2() {
+
+    let slope = Slope(string: input)
+
+    print(
+      slope.treesWhileSliding(x: 1, y: 1) *
+      slope.treesWhileSliding(x: 3, y: 1) *
+      slope.treesWhileSliding(x: 5, y: 1) *
+      slope.treesWhileSliding(x: 7, y: 1) *
+      slope.treesWhileSliding(x: 1, y: 2)
+    )
+  }
 }
