@@ -12,29 +12,25 @@ struct Bag: Hashable {
 
 extension Bag {
     init(string: String) {
-        if string.contains("contain") {
-            let parts = string
-                .components(separatedBy: "contain")
-                .map { $0.trimmingCharacters(in: .whitespacesAndNewlines)}
-            let name = parts[0]
-            let contents = parts[1]
-            color = String(name.dropLast(" bags".count))
-            var containedBags: [String: Int] = [:]
-            guard contents != "no other bags." else {
-                self.containedBags = containedBags
-                return
-            }
-            for content in contents.components(separatedBy: ", ") {
-                let amount = content.prefix(while: { $0 != " "})
-                let name = content
-                    .dropFirst(amount.count + 1)
-                    .components(separatedBy: " bag")[0]
-                containedBags[name] = Int(amount)!
-            }
+        let parts = string
+            .components(separatedBy: "contain")
+            .map { $0.trimmingCharacters(in: .whitespacesAndNewlines)}
+        let name = parts[0]
+        let contents = parts[1]
+        color = String(name.dropLast(" bags".count))
+        var containedBags: [String: Int] = [:]
+        guard contents != "no other bags." else {
             self.containedBags = containedBags
-        } else {
-            fatalError()
+            return
         }
+        for content in contents.components(separatedBy: ", ") {
+            let amount = content.prefix(while: { $0 != " "})
+            let name = content
+                .dropFirst(amount.count + 1)
+                .components(separatedBy: " bag")[0]
+            containedBags[name] = Int(amount)!
+        }
+        self.containedBags = containedBags
     }
 }
 
