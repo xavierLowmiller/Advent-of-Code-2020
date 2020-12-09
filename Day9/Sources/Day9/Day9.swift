@@ -27,18 +27,18 @@ extension Array where Element == Int {
               let indexOfInvalidCipher = firstIndex(of: invalidCipher)
         else { return nil }
 
-        for lowerBound in 0..<indexOfInvalidCipher {
-            for upperBound in (0..<indexOfInvalidCipher).dropFirst(lowerBound) {
-                let range = self[lowerBound...upperBound]
+        var lowerBound: Index = 0
+        var upperBound: Index = 0
+        while lowerBound < indexOfInvalidCipher && upperBound < indexOfInvalidCipher {
+            let range = self[lowerBound...upperBound]
 
-                switch range.reduce(0, +) {
-                case ..<invalidCipher:
-                    continue
-                case invalidCipher:
-                    return range.min()! + range.max()!
-                default:
-                    break
-                }
+            switch range.reduce(0, +) {
+            case ..<invalidCipher:
+                upperBound += 1
+            case invalidCipher:
+                return range.min()! + range.max()!
+            default:
+                lowerBound += 1
             }
         }
 
