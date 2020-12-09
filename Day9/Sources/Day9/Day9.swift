@@ -1,25 +1,17 @@
 extension Array where Element == Int {
     func verifyCipher(preambleSize: Int, offset: Int = 0) -> Int? {
-        let window = self.dropFirst(offset).prefix(preambleSize)
-        guard let number = self.dropFirst(offset + preambleSize).first
-        else { return nil }
+        let window = dropFirst(offset).prefix(preambleSize)
+        guard let number = dropFirst(offset + preambleSize).first else { return nil }
 
-        var pairExists = false
-
-        outerLoop: for number1 in window {
+        for number1 in window {
             for number2 in window {
                 if number1 + number2 == number {
-                    pairExists = true
-                    break outerLoop
+                    return verifyCipher(preambleSize: preambleSize, offset: offset + 1)
                 }
             }
         }
 
-        if pairExists {
-            return verifyCipher(preambleSize: preambleSize, offset: offset + 1)
-        } else {
-            return number
-        }
+        return number
     }
 
     func findWeakness(preambleSize: Int) -> Int? {
@@ -29,15 +21,18 @@ extension Array where Element == Int {
 
         var lowerBound: Index = 0
         var upperBound: Index = 0
-        while lowerBound < indexOfInvalidCipher && upperBound < indexOfInvalidCipher {
+        while lowerBound < indexOfInvalidCipher, upperBound < indexOfInvalidCipher {
             let range = self[lowerBound...upperBound]
 
             switch range.reduce(0, +) {
             case ..<invalidCipher:
+                // Sum of range is too low -> Make range bigger
                 upperBound += 1
             case invalidCipher:
+                // Sum of range matches invalid cipher -> found the weakness!
                 return range.min()! + range.max()!
             default:
+                // Sum of range is high low -> Make range smaller
                 lowerBound += 1
             }
         }
