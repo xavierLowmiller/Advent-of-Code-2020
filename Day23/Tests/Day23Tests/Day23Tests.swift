@@ -5,47 +5,12 @@ final class Day23Tests: XCTestCase {
     func testDay23Part1Example() {
         let crabCups = CrabCups(string: "(3) 8  9  1  2  5  4  6  7")
         XCTAssertEqual(crabCups.currentCup, 3)
-        XCTAssertEqual(crabCups.state, [
-            3: 8,
-            8: 9,
-            9: 1,
-            1: 2,
-            2: 5,
-            5: 4,
-            4: 6,
-            6: 7,
-            7: 3
-        ])
 
         crabCups.playRound()
-
         XCTAssertEqual(crabCups.currentCup, 2)
-        XCTAssertEqual(crabCups.state, [
-            3: 2,
-            2: 8,
-            8: 9,
-            9: 1,
-            1: 5,
-            5: 4,
-            4: 6,
-            6: 7,
-            7: 3
-        ])
 
         crabCups.playRound()
-
         XCTAssertEqual(crabCups.currentCup, 5)
-        XCTAssertEqual(crabCups.state, [
-            3: 2,
-            2: 5,
-            5: 4,
-            4: 6,
-            6: 7,
-            7: 8,
-            8: 9,
-            9: 1,
-            1: 3
-        ])
 
         crabCups.playRound()
         XCTAssertEqual(crabCups.currentCup, 8)
@@ -89,7 +54,7 @@ final class Day23Tests: XCTestCase {
 
     func testDay23Part2Example() {
         let crabCups = CrabCups(string: "389125467", amountOfCups: 1000000)
-        XCTAssertEqual(crabCups.state.count, 1000000)
+        XCTAssertEqual(crabCups.state.count, 1000001)
         for _ in 0..<10000000 {
             crabCups.playRound()
         }
