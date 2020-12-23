@@ -39,11 +39,12 @@ public struct CrabCups {
         currentCup = state[currentCup]
     }
 
-    public var answerPart1: String {
+    public var answerPart1: Int {
         var current = state[1]
-        var answer = ""
+        var answer = 0
         while current != 1 {
-            answer += "\(current)"
+            answer *= 10
+            answer += current
             current = state[current]
         }
         return answer

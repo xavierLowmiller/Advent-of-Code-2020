@@ -36,12 +36,12 @@ final class Day23Tests: XCTestCase {
         crabCups.playRound()
         XCTAssertEqual(crabCups.currentCup, 8)
 
-        XCTAssertEqual(crabCups.answerPart1, "92658374")
+        XCTAssertEqual(crabCups.answerPart1, 92658374)
 
         for _ in 10..<100 {
             crabCups.playRound()
         }
-        XCTAssertEqual(crabCups.answerPart1, "67384529")
+        XCTAssertEqual(crabCups.answerPart1, 67384529)
     }
 
     func testDay23Part1() {
