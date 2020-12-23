@@ -28,18 +28,10 @@ public final class CrabCups {
         let numberToRelocate1 = state[currentCup]!
         let numberToRelocate2 = state[numberToRelocate1]!
         let numberToRelocate3 = state[numberToRelocate2]!
-        var destination = currentCup - 1
-        if destination <= 0 {
-            destination += state.count
-        }
+        let modulo = state.count
+        var destination = (currentCup + modulo - 2) % modulo + 1
         while [numberToRelocate1, numberToRelocate2, numberToRelocate3].contains(destination) {
-            destination -= 1
-            if destination <= 0 {
-                destination += state.count
-            }
-        }
-        if destination <= 0 {
-            destination += state.count
+            destination = (destination + modulo - 2) % modulo + 1
         }
 
         state[currentCup] = state[numberToRelocate3]
