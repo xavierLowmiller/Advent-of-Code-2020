@@ -1,23 +1,19 @@
 public struct CrabCups {
-    // A mapping from cup to its follower
+
     public var state: [Int]
     public var currentCup = 0
 
     public init(string: String, amountOfCups: Int = 9) {
-        state = Array(repeating: 0, count: amountOfCups + 1)
-        let allNumbers = Array(string).compactMap({ $0.wholeNumberValue })
-        for (number1, number2) in zip(allNumbers, allNumbers.dropFirst()) {
-            if currentCup == 0 {
-                currentCup = number1
-            }
+        state = Array(1...amountOfCups + 1)
+
+        let numberInput = Array(string).compactMap { $0.wholeNumberValue }
+        currentCup = numberInput[0]
+        for (number1, number2) in zip(numberInput, numberInput.dropFirst()) {
             state[number1] = number2
         }
-        let lastNumber = allNumbers.last!
-        if allNumbers.count < amountOfCups {
-            for (number1, number2) in zip(1..<amountOfCups, 2..<amountOfCups + 1).dropFirst(allNumbers.count) {
-                state[number1] = number2
-            }
-            state[lastNumber] = allNumbers.count + 1
+        let lastNumber = numberInput.last!
+        if numberInput.count < amountOfCups {
+            state[lastNumber] = numberInput.count + 1
             state[amountOfCups] = currentCup
         } else {
             state[lastNumber] = currentCup
