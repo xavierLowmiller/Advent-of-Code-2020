@@ -30,7 +30,10 @@ public struct CrabCups {
         let numberToRelocate3 = state[numberToRelocate2]
         let modulo = state.count - 1
         var destination = (currentCup + modulo - 2) % modulo + 1
-        while [numberToRelocate1, numberToRelocate2, numberToRelocate3].contains(destination) {
+
+        while numberToRelocate1 == destination
+                || numberToRelocate2 == destination
+                || numberToRelocate3 == destination {
             destination = (destination + modulo - 2) % modulo + 1
         }
 
