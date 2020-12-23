@@ -1,4 +1,4 @@
-public final class CrabCups {
+public struct CrabCups {
     // A mapping from cup to its follower
     public var state: [Int]
     public var currentCup = 0
@@ -24,7 +24,7 @@ public final class CrabCups {
         }
     }
 
-    public func playRound() {
+    mutating public func playRound() {
         let numberToRelocate1 = state[currentCup]
         let numberToRelocate2 = state[numberToRelocate1]
         let numberToRelocate3 = state[numberToRelocate2]

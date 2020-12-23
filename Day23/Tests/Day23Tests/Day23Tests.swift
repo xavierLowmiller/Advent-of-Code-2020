@@ -3,7 +3,7 @@ import Day23
 
 final class Day23Tests: XCTestCase {
     func testDay23Part1Example() {
-        let crabCups = CrabCups(string: "(3) 8  9  1  2  5  4  6  7")
+        var crabCups = CrabCups(string: "(3) 8  9  1  2  5  4  6  7")
         XCTAssertEqual(crabCups.currentCup, 3)
 
         crabCups.playRound()
@@ -45,7 +45,7 @@ final class Day23Tests: XCTestCase {
     }
 
     func testDay23Part1() {
-        let crabCups = CrabCups(string: "614752839")
+        var crabCups = CrabCups(string: "614752839")
         for _ in 0..<100 {
             crabCups.playRound()
         }
@@ -53,7 +53,7 @@ final class Day23Tests: XCTestCase {
     }
 
     func testDay23Part2Example() {
-        let crabCups = CrabCups(string: "389125467", amountOfCups: 1000000)
+        var crabCups = CrabCups(string: "389125467", amountOfCups: 1000000)
         XCTAssertEqual(crabCups.state.count, 1000001)
         for _ in 0..<10000000 {
             crabCups.playRound()
@@ -62,7 +62,7 @@ final class Day23Tests: XCTestCase {
     }
 
     func testDay23Part2() {
-        let crabCups = CrabCups(string: "614752839", amountOfCups: 1000000)
+        var crabCups = CrabCups(string: "614752839", amountOfCups: 1000000)
         for _ in 0..<10000000 {
             crabCups.playRound()
         }
